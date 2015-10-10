@@ -13,3 +13,6 @@ RUN rm -f Python-3.5.0.tgz && rm -rf Python-3.5.0
 # Install pip for Python 3.5
 RUN curl https://bootstrap.pypa.io/ez_setup.py  | python3.5
 RUN easy_install-3.5 pip
+
+# Install Cookiecutter
+RUN pip install --no-cache-dir cookiecutter
