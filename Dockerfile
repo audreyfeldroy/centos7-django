@@ -2,7 +2,7 @@ FROM centos:centos7
 MAINTAINER Audrey Roy Greenfeld <aroy@alum.mit.edu>
 
 # Build tools so that we can build Python from source
-RUN yum groupinstall 'Development Tools'
+RUN yum install gcc gcc-c++ make openssl-devel
 
 # Install Python 3.5
 
