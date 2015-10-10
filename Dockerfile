@@ -1,6 +1,9 @@
 FROM centos:centos7
 MAINTAINER Audrey Roy Greenfeld <aroy@alum.mit.edu>
 
+# Update sources
+RUN yum -y update; yum clean all
+
 # Build tools so that we can build Python from source
 RUN yum install gcc gcc-c++ make openssl-devel
 
