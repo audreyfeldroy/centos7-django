@@ -19,10 +19,9 @@ RUN yum -y install zlib-devel bzip2-devel openssl-devel sqlite-devel
 ENV LANG C.UTF-8
 
 RUN set -x
-RUN curl -SL https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tar.xz
-RUN curl -SL https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tar.xz.asc
-RUN tar -xvf Python-3.5.0.tar.xz
-RUN rm Python-3.5.0.tar.xz*
+RUN curl -O https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tgz
+RUN tar xf Python-3.5.0.tgz
+RUN rm Python-3.5.0.tgz
 WORKDIR Python-3.5.0
 RUN ./configure --enable-shared --enable-unicode=ucs4
 RUN make -j$(nproc)
