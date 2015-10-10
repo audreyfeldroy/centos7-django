@@ -1,6 +1,9 @@
 FROM centos:centos7
 MAINTAINER Audrey Roy Greenfeld <aroy@alum.mit.edu>
 
+# Build tools so that we can build Python from source
+RUN yum groupinstall 'Development Tools'
+
 # Install Python 3.5
 
 # http://bugs.python.org/issue19846
