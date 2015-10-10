@@ -17,13 +17,9 @@ RUN yum -y install zlib-devel bzip2-devel openssl-devel sqlite-devel
 # > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
 ENV LANG C.UTF-8
 
-# gpg: key F73C700D: public key "Larry Hastings <larry@hastings.org>" imported
-RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 97FC712E4C024BBEA48A61ED3A5CA953F73C700D
-
 RUN set -x
 RUN curl -SL https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tar.xz
 RUN curl -SL https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tar.xz.asc
-RUN gpg --verify Python-3.5.0.tar.xz.asc
 RUN tar xf Python-3.5.0.tar.xz
 RUN rm Python-3.5.0.tar.xz*
 WORKDIR Python-3.5.0
