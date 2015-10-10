@@ -8,6 +8,9 @@ RUN yum -y install epel-release; yum -y clean all
 # Build tools so that we can build Python from source
 RUN yum -y group install 'Development Tools'
 
+# Install dependencies that Python 3.5 may need
+RUN yum -y install zlib-devel bzip2-devel openssl-devel sqlite-devel
+
 # Install Python 3.5
 
 # http://bugs.python.org/issue19846
