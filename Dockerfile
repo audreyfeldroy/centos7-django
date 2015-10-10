@@ -7,6 +7,7 @@ RUN yum -y install epel-release; yum -y clean all
 
 # Build tools so that we can build Python from source
 RUN yum -y group install 'Development Tools'
+RUN yum -y install tar
 
 # Install dependencies that Python 3.5 may need
 RUN yum -y install zlib-devel bzip2-devel openssl-devel sqlite-devel
@@ -20,7 +21,7 @@ ENV LANG C.UTF-8
 RUN set -x
 RUN curl -SL https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tar.xz
 RUN curl -SL https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tar.xz.asc
-RUN tar xf Python-3.5.0.tar.xz
+RUN tar -xvf Python-3.5.0.tar.xz
 RUN rm Python-3.5.0.tar.xz*
 WORKDIR Python-3.5.0
 RUN ./configure --enable-shared --enable-unicode=ucs4
