@@ -20,22 +20,18 @@ ENV LANG C.UTF-8
 # gpg: key F73C700D: public key "Larry Hastings <larry@hastings.org>" imported
 RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 97FC712E4C024BBEA48A61ED3A5CA953F73C700D
 
-ENV PYTHON_VERSION 3.5.0
-
-# if this is called "PIP_VERSION", pip explodes with "ValueError: invalid truth value '<VERSION>'"
-ENV PYTHON_PIP_VERSION 7.1.2
-
 RUN set -x
-RUN curl -SL "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" -o python.tar.xz
-RUN curl -SL "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc" -o python.tar.xz.asc
-RUN gpg --verify python.tar.xz.asc
-RUN tar -xJC python --strip-components=1 -f python.tar.xz
-RUN rm python.tar.xz*
+RUN curl -SL https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tar.xz
+RUN curl -SL https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tar.xz.asc
+RUN gpg --verify Python-3.5.0.tar.xz.asc
+RUN tar xf Python-3.5.0.tar.xz
+RUN rm Python-3.5.0.tar.xz*
+WORKDIR Python-3.5.0
 RUN ./configure --enable-shared --enable-unicode=ucs4
 RUN make -j$(nproc)
 RUN make install
 RUN ldconfig
-RUN pip3 install --no-cache-dir --upgrade --ignore-installed pip==$PYTHON_PIP_VERSION
+RUN pip3 install --no-cache-dir --upgrade --ignore-installed pip==7.1.2
 RUN find /usr/local
 		\( -type d -a -name test -o -name tests \)
 		-o \( -type f -a -name '*.pyc' -o -name '*.pyo' \)
