@@ -3,9 +3,10 @@ MAINTAINER Audrey Roy Greenfeld <aroy@alum.mit.edu>
 
 # Update sources
 RUN yum -y update; yum clean all
+RUN yum -y install epel-release; yum -y clean all
 
 # Build tools so that we can build Python from source
-RUN yum -y groupinstall 'Development Tools'
+RUN yum -y group install 'Development Tools'
 
 # Install Python 3.5
 
