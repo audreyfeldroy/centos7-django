@@ -26,13 +26,11 @@ ENV PYTHON_VERSION 3.5.0
 ENV PYTHON_PIP_VERSION 7.1.2
 
 RUN set -x
-RUN mkdir -p /usr/src/python
 RUN curl -SL "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" -o python.tar.xz
 RUN curl -SL "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc" -o python.tar.xz.asc
 RUN gpg --verify python.tar.xz.asc
-RUN tar -xJC /usr/src/python --strip-components=1 -f python.tar.xz
+RUN tar -xJC python --strip-components=1 -f python.tar.xz
 RUN rm python.tar.xz*
-RUN cd /usr/src/python
 RUN ./configure --enable-shared --enable-unicode=ucs4
 RUN make -j$(nproc)
 RUN make install
@@ -42,7 +40,6 @@ RUN find /usr/local
 		\( -type d -a -name test -o -name tests \)
 		-o \( -type f -a -name '*.pyc' -o -name '*.pyo' \)
 		-exec rm -rf '{}' +
-RUN rm -rf /usr/src/python
 
 # Install pip for Python 3.5
 RUN curl https://bootstrap.pypa.io/ez_setup.py  | python3.5
