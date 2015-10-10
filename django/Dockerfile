@@ -16,3 +16,6 @@ RUN easy_install-3.5 pip
 
 # Install Cookiecutter
 RUN pip install --no-cache-dir cookiecutter
+
+# Generate a Django project from cookiecutter-django
+RUN cookiecutter https://github.com/pydanny/cookiecutter-django --no-input
