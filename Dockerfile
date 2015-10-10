@@ -5,7 +5,7 @@ MAINTAINER Audrey Roy Greenfeld <aroy@alum.mit.edu>
 RUN yum -y update; yum clean all
 
 # Build tools so that we can build Python from source
-RUN yum install gcc gcc-c++ make openssl-devel; yum clean all
+RUN yum -y groupinstall 'Development Tools'
 
 # Install Python 3.5
 
