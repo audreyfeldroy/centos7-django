@@ -13,25 +13,13 @@ RUN yum -y install tar
 RUN yum -y install zlib-devel bzip2-devel openssl-devel sqlite-devel
 
 # Install Python 3.5
-
-# http://bugs.python.org/issue19846
-# > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
-ENV LANG C.UTF-8
-
-RUN set -x
 RUN curl -O https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tgz
 RUN tar xf Python-3.5.0.tgz
-RUN rm Python-3.5.0.tgz
 WORKDIR Python-3.5.0
-RUN ./configure --enable-shared --enable-unicode=ucs4
-RUN make -j$(nproc)
-RUN make install
-RUN ldconfig
-RUN pip3 install --no-cache-dir --upgrade --ignore-installed pip==7.1.2
-RUN find /usr/local
-		\( -type d -a -name test -o -name tests \)
-		-o \( -type f -a -name '*.pyc' -o -name '*.pyo' \)
-		-exec rm -rf '{}' +
+RUN ./configure --prefix=/usr/local --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
+RUN make && make altinstall
+WORKDIR ..
+RUN rm -f Python-3.5.0.tgz && rm -rf Python-3.5.0
 
 # Install pip for Python 3.5
 RUN curl https://bootstrap.pypa.io/ez_setup.py  | python3.5
