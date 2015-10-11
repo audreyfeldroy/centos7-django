@@ -12,6 +12,10 @@ RUN yum -y install tar
 # Install dependencies that Python 3.5 may need
 RUN yum -y install zlib-devel bzip2-devel openssl-devel sqlite-devel
 
+# http://bugs.python.org/issue19846
+# > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
+ENV LANG C.UTF-8
+
 # Install Python 3.5
 RUN curl -O https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tgz
 RUN tar xf Python-3.5.0.tgz
