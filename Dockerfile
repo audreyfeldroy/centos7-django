@@ -12,6 +12,11 @@ RUN yum -y install tar
 # Install dependencies that Python 3.5 may need
 RUN yum -y install zlib-devel bzip2-devel openssl-devel sqlite-devel
 
+# Setting LC_ALL and LANG to C.UTF-8 to get Click to work
+# http://click.pocoo.org/5/python3/
+
+export LC_ALL=C.UTF-8
+
 # http://bugs.python.org/issue19846
 # > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
 ENV LANG C.UTF-8
