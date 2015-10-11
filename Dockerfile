@@ -15,11 +15,11 @@ RUN yum -y install zlib-devel bzip2-devel openssl-devel sqlite-devel
 # Setting LC_ALL and LANG to C.UTF-8 to get Click to work
 # http://click.pocoo.org/5/python3/
 
-ENV LC_ALL C.UTF-8
+ENV LC_ALL en_US.UTF-8
 
 # http://bugs.python.org/issue19846
 # > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
-ENV LANG C.UTF-8
+ENV LANG en_US.UTF-8
 
 # Install Python 3.5
 RUN curl -O https://www.python.org/ftp/python/3.5.0/Python-3.5.0.tgz
