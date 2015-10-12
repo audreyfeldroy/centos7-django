@@ -6,7 +6,7 @@ RUN yum -y update; yum clean all
 RUN yum -y install epel-release; yum -y clean all
 
 # Build tools so that we can build Python from source
-RUN yum -y group install 'Development Tools'
+RUN yum -y groupinstall development
 RUN yum -y install tar
 
 # Install dependencies that Python 3.5 may need
